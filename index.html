@@ -16,6 +16,7 @@
             overflow: hidden;
             font-family: 'Roboto', sans-serif;
             cursor: none;
+            touch-action: manipulation;
         }
         .container {
             text-align: center;
@@ -24,56 +25,59 @@
             z-index: 1;
         }
         h1 {
-            font-size: 3.5em;
+            font-size: 2.5em;
             color: #ffe4e1;
-            text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff6699;
+            text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff6699;
             animation: glow 2s ease-in-out infinite alternate;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
         .moon {
-            width: 220px;
-            height: 220px;
+            width: 150px;
+            height: 150px;
             background: radial-gradient(circle, #fff8e1 30%, #f7e6b5 60%, transparent);
             border-radius: 50%;
             position: absolute;
-            top: -150px;
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 0 100px rgba(255, 245, 230, 0.9), 0 0 150px #ffcc00;
+            box-shadow: 0 0 50px rgba(255, 245, 230, 0.7), 0 0 100px #ffcc00;
             animation: float 7s ease-in-out infinite, moonGlow 3s ease-in-out infinite alternate;
             z-index: 0;
         }
         .cloud {
-            width: 150px;
-            height: 50px;
+            width: 100px;
+            height: 30px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 100px;
             position: absolute;
             top: 20%;
-            left: -200px;
-            animation: drift 20s linear infinite;
+            left: -150px;
+            animation: drift 15s linear infinite;
+            z-index: 0;
         }
         .cloud:nth-child(2) {
             top: 40%;
-            left: -300px;
-            animation-duration: 25s;
-            animation-delay: 5s;
+            left: -200px;
+            animation-duration: 18s;
+            animation-delay: 3s;
         }
         .cloud:nth-child(3) {
             top: 60%;
-            left: -250px;
-            animation-duration: 30s;
-            animation-delay: 10s;
+            left: -180px;
+            animation-duration: 20s;
+            animation-delay: 6s;
         }
         .lantern {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             background: radial-gradient(circle, #ff4d4d, #ff1a1a);
             border-radius: 50%;
             position: absolute;
-            box-shadow: 0 0 25px #ff4d4d;
-            animation: rise 10s linear infinite;
+            box-shadow: 0 0 15px #ff4d4d;
+            animation: rise 8s linear infinite;
             opacity: 0;
+            z-index: 2;
         }
         .lantern:nth-child(3) {
             background: radial-gradient(circle, #ffcc00, #ff9900);
@@ -87,64 +91,58 @@
             background: radial-gradient(circle, #66ccff, #3399ff);
             animation-delay: 3s;
         }
-        .lantern:nth-child(6) {
-            background: radial-gradient(circle, #ff99cc, #ff66b3);
-            animation-delay: 4s;
-        }
-        .lantern:nth-child(7) {
-            background: radial-gradient(circle, #cc66ff, #9933ff);
-            animation-delay: 5s;
-        }
         .gift-box {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: #ff6699;
             position: absolute;
-            box-shadow: 0 0 20px #ff99cc;
-            animation: rise 8s linear infinite;
+            box-shadow: 0 0 15px #ff99cc;
+            animation: rise 6s linear infinite;
             opacity: 0;
-            cursor: pointer;
-            transform-origin: center;
+            z-index: 3;
+            touch-action: none;
         }
         .gift-box::before {
             content: '';
             position: absolute;
-            top: -10px;
+            top: -8px;
             left: 50%;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             background: #ffcc00;
             transform: translateX(-50%) rotate(45deg);
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
         .falling-star {
-            width: 6px;
-            height: 6px;
+            width: 4px;
+            height: 4px;
             background: #fff;
             border-radius: 50%;
             position: absolute;
-            animation: fall 3s linear infinite;
+            animation: fall 2s linear infinite;
             opacity: 0;
+            z-index: 1;
         }
         .firework {
             position: absolute;
             pointer-events: none;
+            z-index: 1;
         }
         .audio-control {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 2;
+            bottom: 15px;
+            right: 15px;
+            z-index: 4;
         }
         .audio-btn {
-            padding: 12px 24px;
-            font-size: 1.1em;
+            padding: 8px 16px;
+            font-size: 0.9em;
             background: #ff99cc;
             color: #fff;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 0 15px #ff6699;
+            box-shadow: 0 0 10px #ff6699;
             transition: background 0.3s, transform 0.2s;
         }
         .audio-btn:hover {
@@ -158,25 +156,26 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: rgba(255, 245, 230, 0.95);
-            padding: 20px 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px #ff99cc;
-            z-index: 3;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #ff99cc;
+            z-index: 5;
             text-align: center;
             animation: popupFade 0.5s ease-in;
+            max-width: 80%;
         }
         .popup p {
-            font-size: 1.4em;
+            font-size: 1em;
             color: #333;
             margin: 0;
         }
         .popup button {
-            margin-top: 15px;
-            padding: 10px 20px;
+            margin-top: 10px;
+            padding: 8px 16px;
             background: #ff6699;
             color: #fff;
             border: none;
-            border-radius: 20px;
+            border-radius: 15px;
             cursor: pointer;
             transition: background 0.3s;
         }
@@ -191,29 +190,44 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 2;
+            z-index: 4;
+        }
+        .autoplay-prompt {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 245, 230, 0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #ff99cc;
+            z-index: 5;
+            text-align: center;
+            font-size: 1em;
+            color: #333;
         }
         @keyframes glow {
-            0% { text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff6699; }
-            100% { text-shadow: 0 0 30px #ff99cc, 0 0 60px #ff6699; }
+            0% { text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff6699; }
+            100% { text-shadow: 0 0 15px #ff99cc, 0 0 30px #ff6699; }
         }
         @keyframes float {
             0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, -25px); }
+            50% { transform: translate(-50%, -15px); }
         }
         @keyframes moonGlow {
-            0% { box-shadow: 0 0 100px rgba(255, 245, 230, 0.9), 0 0 150px #ffcc00; }
-            100% { box-shadow: 0 0 150px rgba(255, 245, 230, 0.9), 0 0 200px #ffcc00; }
+            0% { box-shadow: 0 0 50px rgba(255, 245, 230, 0.7), 0 0 100px #ffcc00; }
+            100% { box-shadow: 0 0 75px rgba(255, 245, 230, 0.7), 0 0 150px #ffcc00; }
         }
         @keyframes drift {
-            0% { left: -200px; opacity: 0.3; }
-            50% { opacity: 0.5; }
+            0% { left: -150px; opacity: 0.3; }
+            50% { opacity: 0.4; }
             100% { left: 100%; opacity: 0.3; }
         }
         @keyframes rise {
-            0% { bottom: -100px; opacity: 0; transform: rotate(0deg); }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
+            0% { bottom: -80px; opacity: 0; transform: rotate(0deg); }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
             100% { bottom: 100%; opacity: 0; transform: rotate(360deg); }
         }
         @keyframes fall {
@@ -229,14 +243,61 @@
             top: 0;
             left: 0;
             z-index: 0;
-            opacity: 0.8;
+            opacity: 0.7;
         }
         #mouse-trail {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1;
+            z-index: 2;
             pointer-events: none;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+            .moon {
+                width: 100px;
+                height: 100px;
+                top: -80px;
+            }
+            .cloud {
+                width: 80px;
+                height: 25px;
+            }
+            .lantern {
+                width: 20px;
+                height: 20px;
+            }
+            .gift-box {
+                width: 30px;
+                height: 30px;
+            }
+            .gift-box::before {
+                width: 12px;
+                height: 12px;
+                top: -6px;
+            }
+            .audio-btn {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+            .popup {
+                padding: 10px 20px;
+                max-width: 90%;
+            }
+            .popup p {
+                font-size: 0.9em;
+            }
+            .popup button {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+            .autoplay-prompt {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
@@ -248,12 +309,9 @@
         <div class="cloud"></div>
         <div class="cloud"></div>
         <div class="cloud"></div>
-        <div class="falling-star" style="left: 10%; animation-delay: 0.5s;"></div>
-        <div class="falling-star" style="left: 25%; animation-delay: 1s;"></div>
-        <div class="falling-star" style="left: 40%; animation-delay: 1.5s;"></div>
-        <div class="falling-star" style="left: 55%; animation-delay: 2s;"></div>
-        <div class="falling-star" style="left: 70%; animation-delay: 2.5s;"></div>
-        <div class="falling-star" style="left: 85%; animation-delay: 3s;"></div>
+        <div class="falling-star" style="left: 15%; animation-delay: 0.5s;"></div>
+        <div class="falling-star" style="left: 35%; animation-delay: 1s;"></div>
+        <div class="falling-star" style="left: 65%; animation-delay: 1.5s;"></div>
         <h1>Trung Thu Ngọt Ngào Với Bạn!</h1>
     </div>
     <div class="audio-control">
@@ -264,32 +322,68 @@
         <p id="wish-text"></p>
         <button onclick="closePopup()">Đóng</button>
     </div>
-    <audio id="background-music" loop>
+    <div class="autoplay-prompt" id="autoplay-prompt">Chạm để phát nhạc!</div>
+    <audio id="background-music" loop muted>
         <source src="trung-thu-song.mp3" type="audio/mpeg">
         Trình duyệt của bạn không hỗ trợ âm thanh.
     </audio>
     <script>
-        // Quản lý âm thanh
+        // Audio management
         const audio = document.getElementById('background-music');
         const audioBtn = document.querySelector('.audio-btn');
-        let isPlaying = true;
+        const autoplayPrompt = document.getElementById('autoplay-prompt');
+        let isPlaying = false;
 
-        audio.play().catch(error => {
-            console.log("Autoplay bị chặn, cần tương tác để phát nhạc:", error);
-        });
+        // Attempt to play audio on load
+        function tryPlayAudio() {
+            audio.muted = false; // Unmute after attempting to play
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        isPlaying = true;
+                        audioBtn.textContent = 'Tắt Nhạc';
+                        autoplayPrompt.style.display = 'none';
+                    })
+                    .catch(error => {
+                        console.log("Autoplay failed:", error);
+                        autoplayPrompt.style.display = 'block'; // Show prompt if autoplay fails
+                    });
+            }
+        }
+
+        // Start audio on page load
+        tryPlayAudio();
+
+        // Play audio on first user interaction
+        function handleFirstInteraction() {
+            if (!isPlaying) {
+                tryPlayAudio();
+            }
+            // Remove event listeners after first interaction
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('touchstart', handleFirstInteraction);
+        }
+
+        document.addEventListener('click', handleFirstInteraction);
+        document.addEventListener('touchstart', handleFirstInteraction, { passive: false });
 
         function toggleAudio() {
             if (isPlaying) {
                 audio.pause();
                 audioBtn.textContent = 'Bật Nhạc';
             } else {
-                audio.play();
-                audioBtn.textContent = 'Tắt Nhạc';
+                audio.play().then(() => {
+                    audioBtn.textContent = 'Tắt Nhạc';
+                    autoplayPrompt.style.display = 'none';
+                }).catch(error => {
+                    console.log("Audio play error:", error);
+                });
             }
             isPlaying = !isPlaying;
         }
 
-        // Hộp quà và câu chúc
+        // Gift boxes and wishes
         const wishes = [
             "Chúc bạn học thật giỏi, luôn vui vẻ và tỏa sáng ở Sài Gòn nha! 🌟",
             "Trăng Rằm sáng lung linh, chúc bạn có thật nhiều bạn mới và kỷ niệm đẹp! 💖",
@@ -303,34 +397,36 @@
             "Chúc bạn tân sinh viên có hành trình tuyệt vời, đầy bất ngờ vui vẻ! 🎉"
         ];
 
-        const colors = ['#ff6699', '#66ccff', '#ffcc00', '#cc66ff', '#ff99cc', '#99ff66', '#ff9966'];
+        const colors = ['#ff6699', '#66ccff', '#ffcc00', '#cc66ff', '#ff99cc'];
         function createGiftBox() {
             const box = document.createElement('div');
             box.className = 'gift-box';
-            box.style.left = `${Math.random() * 90 + 5}%`;
+            box.style.left = `${Math.random() * 80 + 10}%`;
             box.style.background = colors[Math.floor(Math.random() * colors.length)];
-            box.style.animationDelay = `${Math.random() * 3}s`;
+            box.style.animationDelay = `${Math.random() * 2}s`;
             document.body.appendChild(box);
 
-            box.addEventListener('click', () => {
+            const handleInteraction = (e) => {
+                e.preventDefault();
                 const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
                 wishText.textContent = randomWish;
                 popup.style.display = 'block';
                 popupBg.style.display = 'block';
-                box.remove(); // Xóa hộp quà sau khi bấm
-            });
+                box.remove();
+            };
 
-            // Tự động xóa khi bay hết màn hình
+            box.addEventListener('click', handleInteraction);
+            box.addEventListener('touchstart', handleInteraction, { passive: false });
+
             setTimeout(() => {
                 if (box.parentNode) box.remove();
-            }, 8000);
+            }, 6000);
         }
 
-        // Tạo 20 hộp quà ban đầu và liên tục bổ sung
-        for (let i = 0; i < 20; i++) {
-            setTimeout(createGiftBox, i * 400);
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createGiftBox, i * 600);
         }
-        setInterval(createGiftBox, 400); // Thêm hộp quà mới mỗi 0.4 giây
+        setInterval(createGiftBox, 600);
 
         const popup = document.getElementById('popup');
         const popupBg = document.getElementById('popup-bg');
@@ -342,21 +438,22 @@
         }
 
         popupBg.addEventListener('click', closePopup);
+        popupBg.addEventListener('touchstart', closePopup, { passive: false });
 
-        // Tạo ngôi sao lấp lánh trên canvas
+        // Star animation
         const starsCanvas = document.getElementById('stars');
         const starsCtx = starsCanvas.getContext('2d');
         starsCanvas.width = window.innerWidth;
         starsCanvas.height = window.innerHeight;
 
         const stars = [];
-        for (let i = 0; i < 150; i++) { // Tăng số sao lấp lánh
+        for (let i = 0; i < 50; i++) {
             stars.push({
                 x: Math.random() * starsCanvas.width,
                 y: Math.random() * starsCanvas.height,
-                radius: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.5 + 0.5,
-                speed: Math.random() * 0.02 + 0.01
+                radius: Math.random() * 1.5 + 1,
+                opacity: Math.random() * 0.4 + 0.4,
+                speed: Math.random() * 0.015 + 0.01
             });
         }
 
@@ -368,13 +465,13 @@
                 starsCtx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
                 starsCtx.fill();
                 star.opacity += star.speed;
-                if (star.opacity > 1 || star.opacity < 0.5) star.speed = -star.speed;
+                if (star.opacity > 0.8 || star.opacity < 0.4) star.speed = -star.speed;
             });
             requestAnimationFrame(animateStars);
         }
         animateStars();
 
-        // Hiệu ứng di chuyển chuột: Trail hình trái tim
+        // Mouse/touch trail
         const trailCanvas = document.getElementById('mouse-trail');
         const trailCtx = trailCanvas.getContext('2d');
         trailCanvas.width = window.innerWidth;
@@ -388,12 +485,12 @@
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 10 + 5; // Tăng size particle
+                this.size = Math.random() * 6 + 3;
                 this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
                 this.life = 1;
-                this.fadeSpeed = Math.random() * 0.03 + 0.02;
-                this.vx = (Math.random() - 0.5) * 3; // Tăng tốc độ lan tỏa
-                this.vy = (Math.random() - 0.5) * 3;
+                this.fadeSpeed = Math.random() * 0.04 + 0.03;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
             }
             update() {
                 this.x += this.vx;
@@ -415,10 +512,19 @@
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            for (let i = 0; i < 4; i++) { // Tăng số particle từ 2 lên 4
+            for (let i = 0; i < 2; i++) {
                 particles.push(new Particle(mouseX, mouseY));
             }
         });
+
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            mouseX = touch.clientX;
+            mouseY = touch.clientY;
+            for (let i = 0; i < 2; i++) {
+                particles.push(new Particle(mouseX, mouseY));
+            }
+        }, { passive: true });
 
         function animateTrail() {
             trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
@@ -431,28 +537,28 @@
         }
         animateTrail();
 
-        // Hiệu ứng pháo hoa
+        // Firework effect
         function createFirework() {
             const firework = document.createElement('div');
             firework.className = 'firework';
-            firework.style.left = `${Math.random() * 90 + 5}%`;
-            firework.style.top = `${Math.random() * 50}%`;
-            firework.style.width = '10px';
-            firework.style.height = '10px';
+            firework.style.left = `${Math.random() * 80 + 10}%`;
+            firework.style.top = `${Math.random() * 40}%`;
+            firework.style.width = '8px';
+            firework.style.height = '8px';
             firework.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
             firework.style.borderRadius = '50%';
             firework.style.position = 'absolute';
             document.body.appendChild(firework);
 
             const particles = [];
-            for (let i = 0; i < 40; i++) { // Tăng số hạt pháo hoa từ 30 lên 40
+            for (let i = 0; i < 20; i++) {
                 particles.push({
                     x: parseFloat(firework.style.left),
                     y: parseFloat(firework.style.top),
-                    vx: (Math.random() - 0.5) * 10, // Tăng tốc độ hạt
-                    vy: (Math.random() - 0.5) * 10,
+                    vx: (Math.random() - 0.5) * 8,
+                    vy: (Math.random() - 0.5) * 8,
                     life: 1,
-                    size: Math.random() * 5 + 3 // Tăng size hạt
+                    size: Math.random() * 4 + 2
                 });
             }
 
@@ -461,7 +567,7 @@
                 particles.forEach((p, index) => {
                     p.x += p.vx;
                     p.y += p.vy;
-                    p.life -= 0.015; // Mờ chậm hơn để kéo dài hiệu ứng
+                    p.life -= 0.02;
                     trailCtx.beginPath();
                     trailCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
                     trailCtx.fillStyle = firework.style.background;
@@ -476,9 +582,9 @@
             animateFirework();
         }
 
-        setInterval(createFirework, 2000); // Giảm interval từ 3000 xuống 2000 để pháo hoa thường xuyên hơn
+        setInterval(createFirework, 3000);
 
-        // Thay đổi kích thước canvas khi resize
+        // Resize canvas on window resize
         window.addEventListener('resize', () => {
             starsCanvas.width = window.innerWidth;
             starsCanvas.height = window.innerHeight;
