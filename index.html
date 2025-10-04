@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Thu Ngọt Ngào Với Bạn Tân Sinh Viên</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top, #0a1a2f, #1e3a5f);
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            cursor: none;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 3.5em;
+            color: #ffe4e1;
+            text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff6699;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 30px;
+        }
+        .moon {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, #fff8e1 30%, #f7e6b5 60%, transparent);
+            border-radius: 50%;
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 100px rgba(255, 245, 230, 0.9), 0 0 150px #ffcc00;
+            animation: float 7s ease-in-out infinite, moonGlow 3s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+        .cloud {
+            width: 150px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            position: absolute;
+            top: 20%;
+            left: -200px;
+            animation: drift 20s linear infinite;
+        }
+        .cloud:nth-child(2) {
+            top: 40%;
+            left: -300px;
+            animation-duration: 25s;
+            animation-delay: 5s;
+        }
+        .cloud:nth-child(3) {
+            top: 60%;
+            left: -250px;
+            animation-duration: 30s;
+            animation-delay: 10s;
+        }
+        .lantern {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ff4d4d, #ff1a1a);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 25px #ff4d4d;
+            animation: rise 10s linear infinite;
+            opacity: 0;
+        }
+        .lantern:nth-child(3) {
+            background: radial-gradient(circle, #ffcc00, #ff9900);
+            animation-delay: 1s;
+        }
+        .lantern:nth-child(4) {
+            background: radial-gradient(circle, #ff6699, #ff3385);
+            animation-delay: 2s;
+        }
+        .lantern:nth-child(5) {
+            background: radial-gradient(circle, #66ccff, #3399ff);
+            animation-delay: 3s;
+        }
+        .lantern:nth-child(6) {
+            background: radial-gradient(circle, #ff99cc, #ff66b3);
+            animation-delay: 4s;
+        }
+        .lantern:nth-child(7) {
+            background: radial-gradient(circle, #cc66ff, #9933ff);
+            animation-delay: 5s;
+        }
+        .gift-box {
+            width: 50px;
+            height: 50px;
+            background: #ff6699;
+            position: absolute;
+            box-shadow: 0 0 20px #ff99cc;
+            animation: rise 8s linear infinite;
+            opacity: 0;
+            cursor: pointer;
+            transform-origin: center;
+        }
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #ffcc00;
+            transform: translateX(-50%) rotate(45deg);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        .falling-star {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            animation: fall 3s linear infinite;
+            opacity: 0;
+        }
+        .firework {
+            position: absolute;
+            pointer-events: none;
+        }
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2;
+        }
+        .audio-btn {
+            padding: 12px 24px;
+            font-size: 1.1em;
+            background: #ff99cc;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff6699;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .audio-btn:hover {
+            background: #ff3385;
+            transform: scale(1.1);
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 245, 230, 0.95);
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px #ff99cc;
+            z-index: 3;
+            text-align: center;
+            animation: popupFade 0.5s ease-in;
+        }
+        .popup p {
+            font-size: 1.4em;
+            color: #333;
+            margin: 0;
+        }
+        .popup button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff6699;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .popup button:hover {
+            background: #ff3385;
+        }
+        .popup-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff6699; }
+            100% { text-shadow: 0 0 30px #ff99cc, 0 0 60px #ff6699; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -25px); }
+        }
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 100px rgba(255, 245, 230, 0.9), 0 0 150px #ffcc00; }
+            100% { box-shadow: 0 0 150px rgba(255, 245, 230, 0.9), 0 0 200px #ffcc00; }
+        }
+        @keyframes drift {
+            0% { left: -200px; opacity: 0.3; }
+            50% { opacity: 0.5; }
+            100% { left: 100%; opacity: 0.3; }
+        }
+        @keyframes rise {
+            0% { bottom: -100px; opacity: 0; transform: rotate(0deg); }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { bottom: 100%; opacity: 0; transform: rotate(360deg); }
+        }
+        @keyframes fall {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        @keyframes popupFade {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.8;
+        }
+        #mouse-trail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="stars"></canvas>
+    <canvas id="mouse-trail"></canvas>
+    <div class="container">
+        <div class="moon"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="falling-star" style="left: 10%; animation-delay: 0.5s;"></div>
+        <div class="falling-star" style="left: 25%; animation-delay: 1s;"></div>
+        <div class="falling-star" style="left: 40%; animation-delay: 1.5s;"></div>
+        <div class="falling-star" style="left: 55%; animation-delay: 2s;"></div>
+        <div class="falling-star" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="falling-star" style="left: 85%; animation-delay: 3s;"></div>
+        <h1>Trung Thu Ngọt Ngào Với Bạn!</h1>
+    </div>
+    <div class="audio-control">
+        <button class="audio-btn" onclick="toggleAudio()">Tắt Nhạc</button>
+    </div>
+    <div class="popup-bg" id="popup-bg"></div>
+    <div class="popup" id="popup">
+        <p id="wish-text"></p>
+        <button onclick="closePopup()">Đóng</button>
+    </div>
+    <audio id="background-music" loop>
+        <source src="trung-thu-song.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ âm thanh.
+    </audio>
+    <script>
+        // Quản lý âm thanh
+        const audio = document.getElementById('background-music');
+        const audioBtn = document.querySelector('.audio-btn');
+        let isPlaying = true;
+
+        audio.play().catch(error => {
+            console.log("Autoplay bị chặn, cần tương tác để phát nhạc:", error);
+        });
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                audioBtn.textContent = 'Bật Nhạc';
+            } else {
+                audio.play();
+                audioBtn.textContent = 'Tắt Nhạc';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Hộp quà và câu chúc
+        const wishes = [
+            "Chúc bạn học thật giỏi, luôn vui vẻ và tỏa sáng ở Sài Gòn nha! 🌟",
+            "Trăng Rằm sáng lung linh, chúc bạn có thật nhiều bạn mới và kỷ niệm đẹp! 💖",
+            "Chúc bạn tân sinh viên luôn mạnh mẽ, tự tin chinh phục mọi thử thách! 🚀",
+            "Mong bạn có một Trung Thu ngọt ngào như bánh rế, ấm áp như đèn lồng! 🥮",
+            "Chúc bạn sớm quen với Sài Gòn, luôn cười tươi và gặp nhiều may mắn nha! 😊",
+            "Chúc bạn có những ngày học tập thật thú vị và đầy năng lượng! 📚✨",
+            "Mong bạn luôn khỏe mạnh, hạnh phúc và thành công trong năm học mới! 🌈",
+            "Chúc bạn tìm thấy niềm vui trong mọi khoảnh khắc ở thành phố mới! 🏙️💕",
+            "Trung Thu này, chúc bạn nhận được thật nhiều yêu thương từ mọi người! ❤️",
+            "Chúc bạn tân sinh viên có hành trình tuyệt vời, đầy bất ngờ vui vẻ! 🎉"
+        ];
+
+        const colors = ['#ff6699', '#66ccff', '#ffcc00', '#cc66ff', '#ff99cc', '#99ff66', '#ff9966'];
+        function createGiftBox() {
+            const box = document.createElement('div');
+            box.className = 'gift-box';
+            box.style.left = `${Math.random() * 90 + 5}%`;
+            box.style.background = colors[Math.floor(Math.random() * colors.length)];
+            box.style.animationDelay = `${Math.random() * 3}s`;
+            document.body.appendChild(box);
+
+            box.addEventListener('click', () => {
+                const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+                wishText.textContent = randomWish;
+                popup.style.display = 'block';
+                popupBg.style.display = 'block';
+                box.remove(); // Xóa hộp quà sau khi bấm
+            });
+
+            // Tự động xóa khi bay hết màn hình
+            setTimeout(() => {
+                if (box.parentNode) box.remove();
+            }, 8000);
+        }
+
+        // Tạo 20 hộp quà ban đầu và liên tục bổ sung
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createGiftBox, i * 400);
+        }
+        setInterval(createGiftBox, 400); // Thêm hộp quà mới mỗi 0.4 giây
+
+        const popup = document.getElementById('popup');
+        const popupBg = document.getElementById('popup-bg');
+        const wishText = document.getElementById('wish-text');
+
+        function closePopup() {
+            popup.style.display = 'none';
+            popupBg.style.display = 'none';
+        }
+
+        popupBg.addEventListener('click', closePopup);
+
+        // Tạo ngôi sao lấp lánh trên canvas
+        const starsCanvas = document.getElementById('stars');
+        const starsCtx = starsCanvas.getContext('2d');
+        starsCanvas.width = window.innerWidth;
+        starsCanvas.height = window.innerHeight;
+
+        const stars = [];
+        for (let i = 0; i < 150; i++) { // Tăng số sao lấp lánh
+            stars.push({
+                x: Math.random() * starsCanvas.width,
+                y: Math.random() * starsCanvas.height,
+                radius: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.5 + 0.5,
+                speed: Math.random() * 0.02 + 0.01
+            });
+        }
+
+        function animateStars() {
+            starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+            stars.forEach(star => {
+                starsCtx.beginPath();
+                starsCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                starsCtx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                starsCtx.fill();
+                star.opacity += star.speed;
+                if (star.opacity > 1 || star.opacity < 0.5) star.speed = -star.speed;
+            });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+
+        // Hiệu ứng di chuyển chuột: Trail hình trái tim
+        const trailCanvas = document.getElementById('mouse-trail');
+        const trailCtx = trailCanvas.getContext('2d');
+        trailCanvas.width = window.innerWidth;
+        trailCanvas.height = window.innerHeight;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        const particles = [];
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 10 + 5; // Tăng size particle
+                this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                this.life = 1;
+                this.fadeSpeed = Math.random() * 0.03 + 0.02;
+                this.vx = (Math.random() - 0.5) * 3; // Tăng tốc độ lan tỏa
+                this.vy = (Math.random() - 0.5) * 3;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.fadeSpeed;
+            }
+            draw() {
+                trailCtx.beginPath();
+                const s = this.size * this.life;
+                trailCtx.moveTo(this.x, this.y - s / 2);
+                trailCtx.bezierCurveTo(this.x - s, this.y - s, this.x - s, this.y + s / 2, this.x, this.y + s);
+                trailCtx.bezierCurveTo(this.x + s, this.y + s / 2, this.x + s, this.y - s, this.x, this.y - s / 2);
+                trailCtx.fillStyle = this.color;
+                trailCtx.globalAlpha = this.life;
+                trailCtx.fill();
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            for (let i = 0; i < 4; i++) { // Tăng số particle từ 2 lên 4
+                particles.push(new Particle(mouseX, mouseY));
+            }
+        });
+
+        function animateTrail() {
+            trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if (p.life <= 0) particles.splice(index, 1);
+            });
+            requestAnimationFrame(animateTrail);
+        }
+        animateTrail();
+
+        // Hiệu ứng pháo hoa
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = `${Math.random() * 90 + 5}%`;
+            firework.style.top = `${Math.random() * 50}%`;
+            firework.style.width = '10px';
+            firework.style.height = '10px';
+            firework.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            firework.style.borderRadius = '50%';
+            firework.style.position = 'absolute';
+            document.body.appendChild(firework);
+
+            const particles = [];
+            for (let i = 0; i < 40; i++) { // Tăng số hạt pháo hoa từ 30 lên 40
+                particles.push({
+                    x: parseFloat(firework.style.left),
+                    y: parseFloat(firework.style.top),
+                    vx: (Math.random() - 0.5) * 10, // Tăng tốc độ hạt
+                    vy: (Math.random() - 0.5) * 10,
+                    life: 1,
+                    size: Math.random() * 5 + 3 // Tăng size hạt
+                });
+            }
+
+            function animateFirework() {
+                trailCtx.save();
+                particles.forEach((p, index) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life -= 0.015; // Mờ chậm hơn để kéo dài hiệu ứng
+                    trailCtx.beginPath();
+                    trailCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                    trailCtx.fillStyle = firework.style.background;
+                    trailCtx.globalAlpha = p.life;
+                    trailCtx.fill();
+                    if (p.life <= 0) particles.splice(index, 1);
+                });
+                trailCtx.restore();
+                if (particles.length > 0) requestAnimationFrame(animateFirework);
+                else firework.remove();
+            }
+            animateFirework();
+        }
+
+        setInterval(createFirework, 2000); // Giảm interval từ 3000 xuống 2000 để pháo hoa thường xuyên hơn
+
+        // Thay đổi kích thước canvas khi resize
+        window.addEventListener('resize', () => {
+            starsCanvas.width = window.innerWidth;
+            starsCanvas.height = window.innerHeight;
+            trailCanvas.width = window.innerWidth;
+            trailCanvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
